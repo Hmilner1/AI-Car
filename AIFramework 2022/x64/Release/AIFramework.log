@@ -1,0 +1,19 @@
+﻿  AIManager.cpp
+C:\Users\m017209k\OneDrive - Staffordshire University\AI Repo\AI-Car\AIFramework 2022\AIManager.cpp(89,27): warning C4456: declaration of 'wp' hides previous local declaration
+C:\Users\m017209k\OneDrive - Staffordshire University\AI Repo\AI-Car\AIFramework 2022\AIManager.cpp(85,15): message : see declaration of 'wp'
+  Background.cpp
+  Collidable.cpp
+  CollisionHelper.cpp
+  DDSTextureLoader.cpp
+  DrawableGameObject.cpp
+C:\Users\m017209k\OneDrive - Staffordshire University\AI Repo\AI-Car\AIFramework 2022\DrawableGameObject.cpp(172,39): warning C4100: 'deltaTime': unreferenced formal parameter
+  main.cpp
+  PickupItem.cpp
+  Vehicle.cpp
+  Waypoint.cpp
+  WaypointManager.cpp
+  Generating code
+  Previous IPDB not found, fall back to full compilation.
+  All 722 functions were compiled because no usable IPDB/IOBJ from previous compilation was found.
+  Finished generating code
+  AIFramework.vcxproj -> C:\Users\m017209k\OneDrive - Staffordshire University\AI Repo\AI-Car\AIFramework 2022\x64\Release\AIFramework.exe

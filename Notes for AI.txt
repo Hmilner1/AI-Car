@@ -1,0 +1,8 @@
+Car Coordinates 
+top left- x=-511, y=378
+top right- x=504, y=376
+bottom left- x=-505, y=-375
+bottom right- x=501, y=-365
+centre- x=-14, y=11
+
+Spacebar Key Param value- VK_Space

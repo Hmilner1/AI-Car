@@ -1,9 +1,13 @@
 #include "Vehicle.h"
 
 #define NORMAL_MAX_SPEED 200
+#define MAX_SPEED 300
+
 
 HRESULT	Vehicle::initMesh(ID3D11Device* pd3dDevice, carColour colour)
 {
+
+
 	m_scale = XMFLOAT3(30, 20, 1);
 
 	if (colour == carColour::redCar)
@@ -18,6 +22,7 @@ HRESULT	Vehicle::initMesh(ID3D11Device* pd3dDevice, carColour colour)
 	HRESULT hr = DrawableGameObject::initMesh(pd3dDevice);
 
 	m_maxSpeed = NORMAL_MAX_SPEED;
+	setMaxSpeed(MAX_SPEED);
 	m_currentSpeed = m_maxSpeed;
 	setVehiclePosition(Vector2D(0, 0));
 
@@ -36,7 +41,7 @@ void Vehicle::update(const float deltaTime)
 	// if the distance to the end point is less than the car would move, then only move that distance. 
 	if (length > 0) {
 		vecTo.Normalize();
-		if(length > velocity)
+		if (length > velocity)
 			vecTo *= velocity;
 		else
 			vecTo *= length;
@@ -64,14 +69,14 @@ void Vehicle::setCurrentSpeed(const float speed)
 {
 	m_currentSpeed = m_maxSpeed * speed;
 	m_currentSpeed = max(0, m_currentSpeed);
-	m_currentSpeed = min(1, m_currentSpeed);
+	m_currentSpeed = min(m_maxSpeed, m_currentSpeed);
 }
 
 // set a position to move to
 void Vehicle::setPositionTo(Vector2D position)
 {
 	m_startPosition = m_currentPosition;
-	
+
 	m_positionTo = position;
 }
 

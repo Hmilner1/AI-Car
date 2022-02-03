@@ -5,7 +5,6 @@
 #include "Vector2D.h"
 #include "Collidable.h"
 
-
 enum class carColour
 {
 	redCar,
@@ -33,12 +32,11 @@ protected: // protected methods
 protected: // preotected properties
 	float m_maxSpeed;
 	float m_currentSpeed;
-	
+
 	Vector2D m_currentPosition;
 	Vector2D m_startPosition;
 	Vector2D m_positionTo;
 	Vector2D m_lastPosition;
 	WaypointManager* m_waypointManager;
-
 };
 

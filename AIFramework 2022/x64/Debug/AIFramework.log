@@ -1,2 +1,4 @@
 ﻿  AIManager.cpp
-  AIFramework.vcxproj -> C:\Users\m017209k\OneDrive - Staffordshire University\AIFramework 2022\x64\Debug\AIFramework.exe
+C:\Users\m017209k\OneDrive - Staffordshire University\AI Repo\AI-Car\AIFramework 2022\AIManager.cpp(94,27): warning C4456: declaration of 'wp' hides previous local declaration
+C:\Users\m017209k\OneDrive - Staffordshire University\AI Repo\AI-Car\AIFramework 2022\AIManager.cpp(90,15): message : see declaration of 'wp'
+  AIFramework.vcxproj -> C:\Users\m017209k\OneDrive - Staffordshire University\AI Repo\AI-Car\AIFramework 2022\x64\Debug\AIFramework.exe

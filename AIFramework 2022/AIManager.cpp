@@ -37,7 +37,7 @@ HRESULT AIManager::initialise(ID3D11Device* pd3dDevice)
     float yPos = 300;
 
     m_pCar = new Vehicle();
-    HRESULT hr = m_pCar->initMesh(pd3dDevice, carColour::redCar);
+    HRESULT hr = m_pCar->initMesh(pd3dDevice, carColour::blueCar);
     m_pCar->setVehiclePosition(Vector2D(xPos, yPos));
     if (FAILED(hr))
         return hr;
@@ -55,6 +55,11 @@ HRESULT AIManager::initialise(ID3D11Device* pd3dDevice)
 
     // (needs to be done after waypoint setup)
     setRandomPickupPosition(pPickupPassenger);
+
+    Vector2D v1 (8, 13);
+    Vector2D v2 (26, 7);
+    Vector2D v3(v1.x + v2.x, v1.y + v2.y);
+
 
     return hr;
 }
@@ -81,7 +86,7 @@ void AIManager::update(const float fDeltaTime)
     }
 
 	// draw the waypoints nearest to the car
-	/*
+	
     Waypoint* wp = m_waypointManager.getNearestWaypoint(m_pCar->getPosition());
 	if (wp != nullptr)
 	{
@@ -91,7 +96,7 @@ void AIManager::update(const float fDeltaTime)
 			AddItemToDrawList(wp);
 		}
 	}
-    */
+    
 
     // update and draw the car (and check for pickup collisions)
 	if (m_pCar != nullptr)
@@ -161,6 +166,11 @@ void AIManager::keyDown(WPARAM param)
 		}
         case key_t:
 		{
+            break;
+        }
+        case VK_SPACE:
+        {
+            m_pCar->setPositionTo(Vector2D(-11, 11));
             break;
         }
         // etc
@@ -245,7 +255,7 @@ bool AIManager::checkForCollisions()
     // does the car bounding sphere collide with the pickup bounding sphere?
     if (boundingSphereCar.Intersects(boundingSpherePU))
     {
-        OutputDebugStringA("A collision has occurred!\n");
+        OutputDebugStringA("pickup collision\n");
         m_pickups[0]->hasCollided();
         setRandomPickupPosition(m_pickups[0]);
 
