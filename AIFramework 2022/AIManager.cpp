@@ -9,6 +9,7 @@
 AIManager::AIManager()
 {
 	m_pCar = nullptr;
+    m_pCar2 = nullptr;
 }
 
 AIManager::~AIManager()
@@ -28,6 +29,9 @@ void AIManager::release()
 
 	delete m_pCar;
 	m_pCar = nullptr;
+
+    delete m_pCar2;
+    m_pCar2 = nullptr;
 }
 
 HRESULT AIManager::initialise(ID3D11Device* pd3dDevice)
@@ -36,11 +40,20 @@ HRESULT AIManager::initialise(ID3D11Device* pd3dDevice)
     float xPos = -500; // an abtrirary start point
     float yPos = 300;
 
+    float xPos2= -500; // an abtrirary start point
+    float yPos2 = 300;
+
     m_pCar = new Vehicle();
     HRESULT hr = m_pCar->initMesh(pd3dDevice, carColour::blueCar);
     m_pCar->setVehiclePosition(Vector2D(xPos, yPos));
     if (FAILED(hr))
         return hr;
+
+    m_pCar2 = new Vehicle();
+    HRESULT hr2 = m_pCar2->initMesh(pd3dDevice, carColour::redCar);
+    m_pCar2->setVehiclePosition(Vector2D(xPos2, yPos2));
+    if (FAILED(hr2))
+        return hr2;
 
     // setup the waypoints
     m_waypointManager.createWaypoints(pd3dDevice);
@@ -97,7 +110,6 @@ void AIManager::update(const float fDeltaTime)
 		}
 	}
     
-
     // update and draw the car (and check for pickup collisions)
 	if (m_pCar != nullptr)
 	{
@@ -105,6 +117,18 @@ void AIManager::update(const float fDeltaTime)
 		checkForCollisions();
 		AddItemToDrawList(m_pCar);
 	}
+
+    if (m_pCar2 != nullptr)
+    {
+        m_pCar2->update(fDeltaTime);
+        checkForCollisions();
+        AddItemToDrawList(m_pCar2);
+
+        if (CarAtLocation == true)
+        {
+            Car2Move();
+        }
+    }
 }
 
 void AIManager::mouseUp(int x, int y)
@@ -116,6 +140,23 @@ void AIManager::mouseUp(int x, int y)
 
     // steering mode
     m_pCar->setPositionTo(wp->getPosition());
+}
+
+void AIManager::Car2Move()
+{
+    Vector2D wayPoint;
+    wayPoint = RandomWaypoint();
+    m_pCar2->setPositionTo(Vector2D(wayPoint.x, wayPoint.y));
+
+    if (m_pCar2->m_currentPosition == wayPoint)
+    {
+        CarAtLocation = true;
+    }
+    else
+    {
+        CarAtLocation = false;
+    }
+
 }
 
 void AIManager::keyUp(WPARAM param)
@@ -137,7 +178,12 @@ void AIManager::keyDown(WPARAM param)
 	const WPARAM key_a = 65;
 	const WPARAM key_s = 83;
     const WPARAM key_t = 84;
-
+    const WPARAM key_q = 81;
+    
+    if (CarAtLocation == true)
+    {
+        Car2Move();
+    }
     switch (param)
     {
         case VK_NUMPAD0:
@@ -155,6 +201,12 @@ void AIManager::keyDown(WPARAM param)
             OutputDebugStringA("2 pressed \n");
             break;
         }
+        case key_q:
+        {
+            Vector2D wayPoint = RandomWaypoint();
+            mouseUp(wayPoint.x, wayPoint.y);   
+            break;
+        }
         case key_a:
         {
             OutputDebugStringA("a Down \n");
@@ -162,6 +214,7 @@ void AIManager::keyDown(WPARAM param)
         }
 		case key_s:
 		{
+            
 			break;
 		}
         case key_t:
@@ -170,13 +223,23 @@ void AIManager::keyDown(WPARAM param)
         }
         case VK_SPACE:
         {
-            m_pCar->setPositionTo(Vector2D(-11, 11));
+            mouseUp(-11, 11);
             break;
         }
         // etc
         default:
             break;
     }
+}
+
+Vector2D AIManager::RandomWaypoint()
+{
+    int x = (rand() % SCREEN_WIDTH) - (SCREEN_WIDTH / 2);
+    int y = (rand() % SCREEN_HEIGHT) - (SCREEN_HEIGHT / 2);
+
+    Waypoint* wp = m_waypointManager.getNearestWaypoint(Vector2D(x, y));
+    
+    return wp->getPosition();
 }
 
 void AIManager::setRandomPickupPosition(PickupItem* pickup)

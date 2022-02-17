@@ -23,6 +23,8 @@ public:
 	void setVehiclePosition(Vector2D position); // the current position - this resets positionTo
 	void setWaypointManager(WaypointManager* wpm);
 	void hasCollided() {}
+	Vector2D m_currentPosition;
+
 
 
 
@@ -33,7 +35,6 @@ protected: // preotected properties
 	float m_maxSpeed;
 	float m_currentSpeed;
 
-	Vector2D m_currentPosition;
 	Vector2D m_startPosition;
 	Vector2D m_positionTo;
 	Vector2D m_lastPosition;
