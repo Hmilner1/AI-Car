@@ -25,6 +25,7 @@ protected:
 	bool	checkForCollisions();
 	void	setRandomPickupPosition(PickupItem* pickup);
 	bool	CarAtLocation = true;
+	Vector2D wayPointCar2;
 
 private:
 	vecPickups              m_pickups;

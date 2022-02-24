@@ -72,7 +72,7 @@ HRESULT AIManager::initialise(ID3D11Device* pd3dDevice)
     Vector2D v1 (8, 13);
     Vector2D v2 (26, 7);
     Vector2D v3(v1.x + v2.x, v1.y + v2.y);
-
+    Car2Move();
 
     return hr;
 }
@@ -124,7 +124,7 @@ void AIManager::update(const float fDeltaTime)
         checkForCollisions();
         AddItemToDrawList(m_pCar2);
 
-        if (CarAtLocation == true)
+        if (m_pCar2->m_currentPosition == wayPointCar2)
         {
             Car2Move();
         }
@@ -144,19 +144,8 @@ void AIManager::mouseUp(int x, int y)
 
 void AIManager::Car2Move()
 {
-    Vector2D wayPoint;
-    wayPoint = RandomWaypoint();
-    m_pCar2->setPositionTo(Vector2D(wayPoint.x, wayPoint.y));
-
-    if (m_pCar2->m_currentPosition == wayPoint)
-    {
-        CarAtLocation = true;
-    }
-    else
-    {
-        CarAtLocation = false;
-    }
-
+    wayPointCar2 = RandomWaypoint();
+    m_pCar2->setPositionTo(Vector2D(wayPointCar2.x, wayPointCar2.y));
 }
 
 void AIManager::keyUp(WPARAM param)
@@ -179,11 +168,6 @@ void AIManager::keyDown(WPARAM param)
 	const WPARAM key_s = 83;
     const WPARAM key_t = 84;
     const WPARAM key_q = 81;
-    
-    if (CarAtLocation == true)
-    {
-        Car2Move();
-    }
     switch (param)
     {
         case VK_NUMPAD0:
