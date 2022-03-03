@@ -5,6 +5,7 @@
 #include "Waypoint.h"
 #include "main.h"
 #include "constants.h"
+#include <cmath>
 
 AIManager::AIManager()
 {
@@ -72,6 +73,7 @@ HRESULT AIManager::initialise(ID3D11Device* pd3dDevice)
     Vector2D v1 (8, 13);
     Vector2D v2 (26, 7);
     Vector2D v3(v1.x + v2.x, v1.y + v2.y);
+
     Car2Move();
 
     return hr;
@@ -187,8 +189,7 @@ void AIManager::keyDown(WPARAM param)
         }
         case key_q:
         {
-            Vector2D wayPoint = RandomWaypoint();
-            mouseUp(wayPoint.x, wayPoint.y);   
+            
             break;
         }
         case key_a:
@@ -198,7 +199,7 @@ void AIManager::keyDown(WPARAM param)
         }
 		case key_s:
 		{
-            
+            Seek();
 			break;
 		}
         case key_t:
@@ -224,6 +225,34 @@ Vector2D AIManager::RandomWaypoint()
     Waypoint* wp = m_waypointManager.getNearestWaypoint(Vector2D(x, y));
     
     return wp->getPosition();
+}
+
+void AIManager::Seek()
+{
+    wayPointCar1 = RandomWaypoint();
+    m_pCar->setPositionTo(Vector2D(wayPointCar1.x, wayPointCar1.y));
+}
+
+void AIManager::Arrive()
+{
+    wayPointCar1 = RandomWaypoint();
+    m_pCar->setPositionTo(Vector2D(wayPointCar1.x, wayPointCar1.y));
+
+}
+
+void AIManager::Wander()
+{
+
+}
+
+void AIManager::Pursuit()
+{
+
+}
+
+void AIManager::Flee()
+{
+
 }
 
 void AIManager::setRandomPickupPosition(PickupItem* pickup)

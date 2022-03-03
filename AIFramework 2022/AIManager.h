@@ -20,12 +20,18 @@ public:
 	void	keyDown(WPARAM param);
 	void	keyUp(WPARAM param);
 	void	Car2Move();
+	void	Seek();
+	void	Arrive();
+	void	Wander();
+	void	Pursuit();
+	void	Flee();
 	Vector2D RandomWaypoint();
 protected:
 	bool	checkForCollisions();
 	void	setRandomPickupPosition(PickupItem* pickup);
 	bool	CarAtLocation = true;
 	Vector2D wayPointCar2;
+	Vector2D wayPointCar1;
 
 private:
 	vecPickups              m_pickups;
