@@ -6,3 +6,18 @@ bottom right- x=501, y=-365
 centre- x=-14, y=11
 
 Spacebar Key Param value- VK_Space
+
+    Vector2D m_Direction = wayPointCar1 - m_pCar->getPosition();
+    double m_Distance = m_Direction.Length();
+
+    if (m_Distance > 0.0)
+    {
+        double m_Speed = m_Distance / 2;
+        m_Speed = min(m_Speed, 300);
+
+        Vector2D m_DesiredVelocity = m_Direction * m_Speed / m_Distance;
+
+        m_pCar->setMaxSpeed() = m_DesiredVelocity;
+	
+	return desiredvelocity - current
+    }

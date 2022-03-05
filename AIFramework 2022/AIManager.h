@@ -32,7 +32,7 @@ protected:
 	bool	CarAtLocation = true;
 	Vector2D wayPointCar2;
 	Vector2D wayPointCar1;
-
+	bool m_Wander = false;
 private:
 	vecPickups              m_pickups;
 	Vehicle*				m_pCar = nullptr;

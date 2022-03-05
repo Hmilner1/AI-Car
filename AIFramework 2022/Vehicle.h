@@ -24,6 +24,7 @@ public:
 	void setWaypointManager(WaypointManager* wpm);
 	void hasCollided() {}
 	Vector2D m_currentPosition;
+	float m_currentSpeed;
 
 
 
@@ -33,7 +34,6 @@ protected: // protected methods
 
 protected: // preotected properties
 	float m_maxSpeed;
-	float m_currentSpeed;
 
 	Vector2D m_startPosition;
 	Vector2D m_positionTo;

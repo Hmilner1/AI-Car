@@ -126,9 +126,12 @@ void AIManager::update(const float fDeltaTime)
         checkForCollisions();
         AddItemToDrawList(m_pCar2);
 
-        if (m_pCar2->m_currentPosition == wayPointCar2)
+        if (m_Wander == true)
         {
-            Car2Move();
+            if (m_pCar2->m_currentPosition == wayPointCar2)
+            {
+                Car2Move();
+            }
         }
     }
 }
@@ -167,11 +170,14 @@ void AIManager::keyDown(WPARAM param)
 {
 	// hint 65-90 are a-z
 	const WPARAM key_a = 65;
+    const WPARAM key_f = 70;
 	const WPARAM key_s = 83;
     const WPARAM key_t = 84;
     const WPARAM key_q = 81;
+    const WPARAM key_w = 87;
     switch (param)
     {
+        /*
         case VK_NUMPAD0:
         {
             OutputDebugStringA("0 pressed \n");
@@ -187,14 +193,10 @@ void AIManager::keyDown(WPARAM param)
             OutputDebugStringA("2 pressed \n");
             break;
         }
-        case key_q:
-        {
-            
-            break;
-        }
+        */
         case key_a:
         {
-            OutputDebugStringA("a Down \n");
+            Arrive();
             break;
         }
 		case key_s:
@@ -202,8 +204,14 @@ void AIManager::keyDown(WPARAM param)
             Seek();
 			break;
 		}
-        case key_t:
-		{
+        case key_f:
+        {
+            Flee();
+            break;
+        }
+        case key_w:
+        {
+            Wander();
             break;
         }
         case VK_SPACE:
@@ -237,12 +245,18 @@ void AIManager::Arrive()
 {
     wayPointCar1 = RandomWaypoint();
     m_pCar->setPositionTo(Vector2D(wayPointCar1.x, wayPointCar1.y));
-
 }
 
 void AIManager::Wander()
 {
-
+    if (m_Wander == false)
+    {
+        m_Wander = true;
+    }
+    else
+    {
+        m_Wander = false;
+    }
 }
 
 void AIManager::Pursuit()
@@ -252,7 +266,7 @@ void AIManager::Pursuit()
 
 void AIManager::Flee()
 {
-
+    m_pCar2->setPositionTo(Vector2D(-m_pCar->getPosition().x, -m_pCar->getPosition().y));
 }
 
 void AIManager::setRandomPickupPosition(PickupItem* pickup)
