@@ -174,6 +174,7 @@ void AIManager::keyDown(WPARAM param)
 	const WPARAM key_s = 83;
     const WPARAM key_t = 84;
     const WPARAM key_q = 81;
+    const WPARAM key_p = 80;
     const WPARAM key_w = 87;
     switch (param)
     {
@@ -214,6 +215,11 @@ void AIManager::keyDown(WPARAM param)
             Wander();
             break;
         }
+        case key_p:
+        {
+            Pursuit();
+            break;
+        }
         case VK_SPACE:
         {
             mouseUp(-11, 11);
@@ -245,6 +251,11 @@ void AIManager::Arrive()
 {
     wayPointCar1 = RandomWaypoint();
     m_pCar->setPositionTo(Vector2D(wayPointCar1.x, wayPointCar1.y));
+
+    Vector2D m_Direction = wayPointCar1 - m_pCar->getPosition();
+    double m_Distance = m_Direction.Length();
+    
+
 }
 
 void AIManager::Wander()
@@ -252,6 +263,7 @@ void AIManager::Wander()
     if (m_Wander == false)
     {
         m_Wander = true;
+        Car2Move();
     }
     else
     {
@@ -261,7 +273,7 @@ void AIManager::Wander()
 
 void AIManager::Pursuit()
 {
-
+    m_pCar2->setPositionTo(Vector2D(m_pCar->getPosition().x, m_pCar->getPosition().y));
 }
 
 void AIManager::Flee()
