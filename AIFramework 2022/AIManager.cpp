@@ -241,10 +241,14 @@ Vector2D AIManager::RandomWaypoint()
     return wp->getPosition();
 }
 
-void AIManager::Seek()
+Vector2D AIManager::Seek()
 {
     wayPointCar1 = RandomWaypoint();
-    m_pCar->setPositionTo(Vector2D(wayPointCar1.x, wayPointCar1.y));
+   // m_pCar->setPositionTo(Vector2D(wayPointCar1.x, wayPointCar1.y));
+
+    Vector2D m_Direction = wayPointCar1 - m_pCar->getPosition() * m_pCar->m_currentSpeed;
+
+    return m_Direction;
 }
 
 void AIManager::Arrive()
@@ -254,8 +258,6 @@ void AIManager::Arrive()
 
     Vector2D m_Direction = wayPointCar1 - m_pCar->getPosition();
     double m_Distance = m_Direction.Length();
-    
-
 }
 
 void AIManager::Wander()

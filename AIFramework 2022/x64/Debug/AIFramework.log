@@ -1,5 +1,2 @@
-﻿  AIManager.cpp
-C:\Users\m017209k\OneDrive - Staffordshire University\AI Repo\AI-Car\AIFramework 2022\AIManager.cpp(109,27): warning C4456: declaration of 'wp' hides previous local declaration
-C:\Users\m017209k\OneDrive - Staffordshire University\AI Repo\AI-Car\AIFramework 2022\AIManager.cpp(105,15): message : see declaration of 'wp'
-C:\Users\m017209k\OneDrive - Staffordshire University\AI Repo\AI-Car\AIFramework 2022\AIManager.cpp(256,12): warning C4189: 'm_Distance': local variable is initialized but not referenced
+﻿  Vehicle.cpp
   AIFramework.vcxproj -> C:\Users\m017209k\OneDrive - Staffordshire University\AI Repo\AI-Car\AIFramework 2022\x64\Debug\AIFramework.exe

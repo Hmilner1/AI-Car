@@ -5,6 +5,7 @@
 #include "Vector2D.h"
 #include "Collidable.h"
 
+class AIManager;
 enum class carColour
 {
 	redCar,
@@ -25,7 +26,7 @@ public:
 	void hasCollided() {}
 	Vector2D m_currentPosition;
 	float m_currentSpeed;
-
+	float m_Acceleration;
 
 
 
@@ -39,5 +40,10 @@ protected: // preotected properties
 	Vector2D m_positionTo;
 	Vector2D m_lastPosition;
 	WaypointManager* m_waypointManager;
+
+private:
+	AIManager *m_Aiman = nullptr;
+
+
 };
 

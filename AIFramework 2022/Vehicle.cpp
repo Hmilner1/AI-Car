@@ -1,13 +1,14 @@
 #include "Vehicle.h"
+#include "AIManager.h"
 
-#define NORMAL_MAX_SPEED 200
+#define NORMAL_SPEED 200
 #define MAX_SPEED 300
 
 
 HRESULT	Vehicle::initMesh(ID3D11Device* pd3dDevice, carColour colour)
 {
 
-
+	m_Aiman = new AIManager();
 	m_scale = XMFLOAT3(30, 20, 1);
 
 	if (colour == carColour::redCar)
@@ -21,9 +22,9 @@ HRESULT	Vehicle::initMesh(ID3D11Device* pd3dDevice, carColour colour)
 
 	HRESULT hr = DrawableGameObject::initMesh(pd3dDevice);
 
-	m_maxSpeed = NORMAL_MAX_SPEED;
+	m_maxSpeed = MAX_SPEED;
 	setMaxSpeed(MAX_SPEED);
-	m_currentSpeed = m_maxSpeed;
+	m_currentSpeed = NORMAL_SPEED;
 	setVehiclePosition(Vector2D(0, 0));
 
 	m_lastPosition = Vector2D(0, 0);
@@ -37,6 +38,16 @@ void Vehicle::update(const float deltaTime)
 	Vector2D vecTo = m_positionTo - m_currentPosition;
 	float velocity = deltaTime * m_currentSpeed;
 
+	//TODO: 
+	// Steering force needs to found before acc can be worked out 
+	// 
+	//vec2 acc = the steering force/ the mass of the car 
+	//vec2 vel = acc * deltaTime
+	//
+	//m_CurrentPosition = Vel* deltaTime
+	
+	
+ 
 	float length = (float)vecTo.Length();
 	// if the distance to the end point is less than the car would move, then only move that distance. 
 	if (length > 0) {
@@ -48,6 +59,11 @@ void Vehicle::update(const float deltaTime)
 
 		m_currentPosition += vecTo;
 	}
+
+	//Vector2D acc = m_Aiman->Seek() / 3;
+	//Vector2D vel = acc * deltaTime;
+
+	//setVehiclePosition(vel * deltaTime);
 
 	// rotate the object based on its last & current position
 	Vector2D diff = m_currentPosition - m_lastPosition;
