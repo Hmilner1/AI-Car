@@ -197,12 +197,12 @@ void AIManager::keyDown(WPARAM param)
         */
         case key_a:
         {
-            Arrive();
+            m_pCar->m_Seek = Arrive();
             break;
         }
 		case key_s:
 		{
-            Seek();
+            m_pCar->m_Seek = Seek();
 			break;
 		}
         case key_f:
@@ -246,18 +246,14 @@ Vector2D AIManager::Seek()
     wayPointCar1 = RandomWaypoint();
    // m_pCar->setPositionTo(Vector2D(wayPointCar1.x, wayPointCar1.y));
 
-    Vector2D m_Direction = wayPointCar1 - m_pCar->getPosition() * m_pCar->m_currentSpeed;
+    Vector2D m_SteerForce = ((Vector2D(14,2)) - (m_pCar->getPosition())) * m_pCar->m_maxSpeed;
 
-    return m_Direction;
+    return (m_SteerForce - m_pCar->vel);
 }
 
-void AIManager::Arrive()
+Vector2D AIManager::Arrive()
 {
-    wayPointCar1 = RandomWaypoint();
-    m_pCar->setPositionTo(Vector2D(wayPointCar1.x, wayPointCar1.y));
-
-    Vector2D m_Direction = wayPointCar1 - m_pCar->getPosition();
-    double m_Distance = m_Direction.Length();
+   
 }
 
 void AIManager::Wander()

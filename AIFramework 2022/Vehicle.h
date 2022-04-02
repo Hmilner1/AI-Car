@@ -27,20 +27,21 @@ public:
 	Vector2D m_currentPosition;
 	float m_currentSpeed;
 	float m_Acceleration;
-
+	Vector2D m_Seek;
+	float m_Mass;
+	Vector2D vel;
+	float m_maxSpeed;
 
 
 protected: // protected methods
 
 
 protected: // preotected properties
-	float m_maxSpeed;
 
 	Vector2D m_startPosition;
 	Vector2D m_positionTo;
 	Vector2D m_lastPosition;
 	WaypointManager* m_waypointManager;
-
 private:
 	AIManager *m_Aiman = nullptr;
 

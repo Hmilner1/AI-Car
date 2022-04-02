@@ -21,3 +21,40 @@ Spacebar Key Param value- VK_Space
 	
 	return desiredvelocity - current
     }
+
+//old movement system
+
+float velocity = deltaTime * m_currentSpeed;
+float length = (float)vecTo.Length();
+	 //if the distance to the end point is less than the car would move, then only move that distance. 
+	if (length > 0) {
+		vecTo.Normalize();
+		if (length > velocity)
+			vecTo *= velocity;
+		else
+			vecTo *= length;
+
+		m_currentPosition += vecTo;
+	}
+
+
+
+
+
+ wayPointCar1 = RandomWaypoint();
+    
+    Vector2D direction = wayPointCar1 - m_pCar->getPosition();
+    
+    double distance = direction.Length();
+
+    if (distance > 0.0) {
+
+        double speed = distance / 2;
+        speed = min(speed, 900);
+
+
+        Vector2D desiredVelocity = direction * speed / distance;
+
+        return (desiredVelocity - m_pCar->vel);
+    }
+    return Vector2D(0, 0);

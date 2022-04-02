@@ -21,7 +21,7 @@ public:
 	void	keyUp(WPARAM param);
 	void	Car2Move();
 	Vector2D	Seek();
-	void	Arrive();
+	Vector2D	Arrive();
 	void	Wander();
 	void	Pursuit();
 	void	Flee();
