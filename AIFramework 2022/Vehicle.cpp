@@ -1,15 +1,14 @@
 #include "Vehicle.h"
 #include "AIManager.h"
 
-#define NORMAL_SPEED 500
-#define MAX_SPEED 500
+#define NORMAL_SPEED 5000
+#define MAX_SPEED 10000
 
 
 HRESULT	Vehicle::initMesh(ID3D11Device* pd3dDevice, carColour colour)
 {
-
-	m_Aiman = new AIManager();
 	m_scale = XMFLOAT3(30, 20, 1);
+	
 
 	if (colour == carColour::redCar)
 	{
@@ -24,26 +23,30 @@ HRESULT	Vehicle::initMesh(ID3D11Device* pd3dDevice, carColour colour)
 
 	m_Mass = 1.0f;
 
-	m_maxSpeed = MAX_SPEED;
 	setMaxSpeed(MAX_SPEED);
 	m_currentSpeed = NORMAL_SPEED;
+	setCurrentSpeed(m_currentSpeed);
 
-	setVehiclePosition(Vector2D(0, 0));
-
-	m_lastPosition = Vector2D(0, 0);
 	vel = Vector2D(0, 0);
+	setVehiclePosition(Vector2D(0, 0));
+	m_lastPosition = Vector2D(0, 0);
 
 	return hr;
 }
 
 void Vehicle::update(const float deltaTime)
 {
-	Vector2D vecTo = m_positionTo - m_currentPosition;
-
-	Vector2D acc = m_Seek / m_Mass;
+	//velocity movement
+	// works out acceletation based of steering force
+	Vector2D acc = Seek() / m_Mass;
+	//makes sure it cant go over its max speed
+	m_SteeringForce.Truncate(m_maxSpeed);
+	//sets velocity
 	vel = acc * deltaTime;
-
+	//sets the position based off velocity 
 	m_currentPosition += vel * deltaTime;
+
+	//Vector2D vecTo = m_positionTo - m_currentPosition;
 
 	// rotate the object based on its last & current position
 	Vector2D diff = m_currentPosition - m_lastPosition;
@@ -90,4 +93,12 @@ void Vehicle::setWaypointManager(WaypointManager* wpm)
 	m_waypointManager = wpm;
 }
 
+Vector2D Vehicle::Seek()
+{
+	Vector2D Target = Vector2D(460, -343);
+	Vector2D m_SteerForce = (Target - m_currentPosition);
+	m_SteerForce.Normalize();
+	m_SteerForce = m_SteerForce * m_maxSpeed;
+	return (m_SteerForce - vel);
+}
 

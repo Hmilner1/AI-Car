@@ -73,9 +73,6 @@ HRESULT AIManager::initialise(ID3D11Device* pd3dDevice)
     Vector2D v1 (8, 13);
     Vector2D v2 (26, 7);
     Vector2D v3(v1.x + v2.x, v1.y + v2.y);
-
-    Car2Move();
-
     return hr;
 }
 
@@ -125,14 +122,6 @@ void AIManager::update(const float fDeltaTime)
         m_pCar2->update(fDeltaTime);
         checkForCollisions();
         AddItemToDrawList(m_pCar2);
-
-        if (m_Wander == true)
-        {
-            if (m_pCar2->m_currentPosition == wayPointCar2)
-            {
-                Car2Move();
-            }
-        }
     }
 }
 
@@ -144,13 +133,7 @@ void AIManager::mouseUp(int x, int y)
 		return;
 
     // steering mode
-    m_pCar->setPositionTo(wp->getPosition());
-}
-
-void AIManager::Car2Move()
-{
-    wayPointCar2 = RandomWaypoint();
-    m_pCar2->setPositionTo(Vector2D(wayPointCar2.x, wayPointCar2.y));
+    //m_pCar->setPositionTo(wp->getPosition());
 }
 
 void AIManager::keyUp(WPARAM param)
@@ -178,46 +161,28 @@ void AIManager::keyDown(WPARAM param)
     const WPARAM key_w = 87;
     switch (param)
     {
-        /*
-        case VK_NUMPAD0:
-        {
-            OutputDebugStringA("0 pressed \n");
-            break;
-        }
-        case VK_NUMPAD1:
-        {
-            OutputDebugStringA("1 pressed \n");
-            break;
-        }
-        case VK_NUMPAD2:
-        {
-            OutputDebugStringA("2 pressed \n");
-            break;
-        }
-        */
         case key_a:
         {
-            m_pCar->m_Seek = Arrive();
+
             break;
         }
 		case key_s:
 		{
-            m_pCar->m_Seek = Seek();
 			break;
 		}
         case key_f:
         {
-            Flee();
+            
             break;
         }
         case key_w:
         {
-            Wander();
+
             break;
         }
         case key_p:
         {
-            Pursuit();
+           
             break;
         }
         case VK_SPACE:
@@ -225,7 +190,6 @@ void AIManager::keyDown(WPARAM param)
             mouseUp(-11, 11);
             break;
         }
-        // etc
         default:
             break;
     }
@@ -239,44 +203,6 @@ Vector2D AIManager::RandomWaypoint()
     Waypoint* wp = m_waypointManager.getNearestWaypoint(Vector2D(x, y));
     
     return wp->getPosition();
-}
-
-Vector2D AIManager::Seek()
-{
-    wayPointCar1 = RandomWaypoint();
-   // m_pCar->setPositionTo(Vector2D(wayPointCar1.x, wayPointCar1.y));
-
-    Vector2D m_SteerForce = ((Vector2D(14,2)) - (m_pCar->getPosition())) * m_pCar->m_maxSpeed;
-
-    return (m_SteerForce - m_pCar->vel);
-}
-
-Vector2D AIManager::Arrive()
-{
-   
-}
-
-void AIManager::Wander()
-{
-    if (m_Wander == false)
-    {
-        m_Wander = true;
-        Car2Move();
-    }
-    else
-    {
-        m_Wander = false;
-    }
-}
-
-void AIManager::Pursuit()
-{
-    m_pCar2->setPositionTo(Vector2D(m_pCar->getPosition().x, m_pCar->getPosition().y));
-}
-
-void AIManager::Flee()
-{
-    m_pCar2->setPositionTo(Vector2D(-m_pCar->getPosition().x, -m_pCar->getPosition().y));
 }
 
 void AIManager::setRandomPickupPosition(PickupItem* pickup)

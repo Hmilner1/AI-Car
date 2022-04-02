@@ -4,8 +4,8 @@
 #include "WaypointManager.h"
 #include "Vector2D.h"
 #include "Collidable.h"
+#include "AIManager.h"
 
-class AIManager;
 enum class carColour
 {
 	redCar,
@@ -27,11 +27,12 @@ public:
 	Vector2D m_currentPosition;
 	float m_currentSpeed;
 	float m_Acceleration;
-	Vector2D m_Seek;
+	Vector2D m_SteeringForce;
 	float m_Mass;
 	Vector2D vel;
 	float m_maxSpeed;
-
+	bool Seeking;
+	Vector2D Seek();
 
 protected: // protected methods
 
@@ -43,7 +44,6 @@ protected: // preotected properties
 	Vector2D m_lastPosition;
 	WaypointManager* m_waypointManager;
 private:
-	AIManager *m_Aiman = nullptr;
 
 
 };

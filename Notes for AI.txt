@@ -58,3 +58,31 @@ float length = (float)vecTo.Length();
         return (desiredVelocity - m_pCar->vel);
     }
     return Vector2D(0, 0);
+
+
+
+  /*
+        case VK_NUMPAD0:
+        {
+            OutputDebugStringA("0 pressed \n");
+            break;
+        }
+        case VK_NUMPAD1:
+        {
+            OutputDebugStringA("1 pressed \n");
+            break;
+        }
+        case VK_NUMPAD2:
+        {
+            OutputDebugStringA("2 pressed \n");
+            break;
+        }
+        */
+
+
+Vector2D AIManager::Seek()
+{
+    wayPointCar1 = Vector2D(12,3);
+    Vector2D m_SteerForce = ( wayPointCar1 - m_pCar->getPosition() * m_pCar->m_maxSpeed);
+    return (m_SteerForce - m_pCar->vel);
+}
