@@ -133,7 +133,7 @@ void AIManager::mouseUp(int x, int y)
 		return;
 
     // steering mode
-    //m_pCar->setPositionTo(wp->getPosition());
+    m_pCar->setPositionTo(wp->getPosition());
 }
 
 void AIManager::keyUp(WPARAM param)
@@ -168,6 +168,7 @@ void AIManager::keyDown(WPARAM param)
         }
 		case key_s:
 		{
+            m_pCar->m_SteeringForce = m_pCar->Seek(RandomWaypoint());
 			break;
 		}
         case key_f:

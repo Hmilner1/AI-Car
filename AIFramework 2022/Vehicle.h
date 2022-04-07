@@ -32,7 +32,9 @@ public:
 	Vector2D vel;
 	float m_maxSpeed;
 	bool Seeking;
-	Vector2D Seek();
+	Vector2D Seek(Vector2D Target);
+	Vector2D Arrive(Vector2D Target);
+
 
 protected: // protected methods
 

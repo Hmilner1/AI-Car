@@ -38,15 +38,13 @@ void Vehicle::update(const float deltaTime)
 {
 	//velocity movement
 	// works out acceletation based of steering force
-	Vector2D acc = Seek() / m_Mass;
+	Vector2D acc = m_SteeringForce / m_Mass;
 	//makes sure it cant go over its max speed
 	m_SteeringForce.Truncate(m_maxSpeed);
 	//sets velocity
 	vel = acc * deltaTime;
 	//sets the position based off velocity 
 	m_currentPosition += vel * deltaTime;
-
-	//Vector2D vecTo = m_positionTo - m_currentPosition;
 
 	// rotate the object based on its last & current position
 	Vector2D diff = m_currentPosition - m_lastPosition;
@@ -93,12 +91,16 @@ void Vehicle::setWaypointManager(WaypointManager* wpm)
 	m_waypointManager = wpm;
 }
 
-Vector2D Vehicle::Seek()
+Vector2D Vehicle::Seek(Vector2D Target)
 {
-	Vector2D Target = Vector2D(460, -343);
+	Vector2D target = Target;
 	Vector2D m_SteerForce = (Target - m_currentPosition);
 	m_SteerForce.Normalize();
 	m_SteerForce = m_SteerForce * m_maxSpeed;
 	return (m_SteerForce - vel);
 }
 
+Vector2D Vehicle::Arrive(Vector2D Target)
+{
+	return Target;
+}
