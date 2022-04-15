@@ -63,6 +63,12 @@ void Vehicle::update(const float deltaTime)
 		case 4:
 		{
 			m_SteeringForce = Pursuit(m_Target);
+			break;
+		}
+		case 5:
+		{
+			m_SteeringForce = Flee(m_Target);
+			break;
 		}
 	}
 	//velocity movement
@@ -160,6 +166,15 @@ Vector2D Vehicle::Pursuit(Vector2D Target)
 {
 	Vector2D target = Target;
 	Vector2D m_SteerForce = (Target - GetPosition() - Vector2D(30,0));
+	m_SteerForce.Normalize();
+	m_SteerForce = m_SteerForce * m_maxSpeed;
+	return (m_SteerForce - GetVelocity());
+}
+
+Vector2D Vehicle::Flee(Vector2D Target)
+{
+	Vector2D target = Target;
+	Vector2D m_SteerForce = (Target + GetPosition() - Vector2D(30, 0));
 	m_SteerForce.Normalize();
 	m_SteerForce = m_SteerForce * m_maxSpeed;
 	return (m_SteerForce - GetVelocity());

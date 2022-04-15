@@ -42,6 +42,7 @@ public:
 	Vector2D Arrive(Vector2D Target);
 	Vector2D Wander(Vector2D Target);
 	Vector2D Pursuit(Vector2D Target);
+	Vector2D Flee(Vector2D Target);
 	Vector2D RandomTarget();
 	float m_Distance;
 	int m_State;

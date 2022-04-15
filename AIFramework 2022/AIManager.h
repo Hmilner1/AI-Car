@@ -32,7 +32,9 @@ private:
 	Vehicle*				m_pCar2 = nullptr;
 	WaypointManager			m_waypointManager;
 	bool m_persuitOn;
+	bool m_FleeOn;
 	void	Pursuit();
+	void	Flee();
 
 };
 

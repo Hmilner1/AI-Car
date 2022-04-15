@@ -130,6 +130,13 @@ void AIManager::update(const float fDeltaTime)
         Vector2D position = m_pCar2->m_currentPosition;
         m_pCar->m_Target = position;
     }
+
+    if (m_FleeOn == true)
+    {
+        Vector2D position = m_pCar2->m_currentPosition;
+        m_pCar->m_Target = position;
+    }
+    
 }
 
 void AIManager::mouseUp(int x, int y)
@@ -182,7 +189,8 @@ void AIManager::keyDown(WPARAM param)
 		}
         case key_f:
         {
-            
+            Flee();
+            m_pCar->m_State = 5;
             break;
         }
         case key_w:
@@ -216,6 +224,18 @@ void AIManager::Pursuit()
     else if (m_persuitOn == false)
     {
         m_persuitOn = true;
+    }
+}
+
+void AIManager::Flee()
+{
+    if (m_FleeOn == true)
+    {
+        m_FleeOn = false;
+    }
+    else if (m_FleeOn == false)
+    {
+        m_FleeOn = true;
     }
 }
 
