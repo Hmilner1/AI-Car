@@ -73,6 +73,7 @@ HRESULT AIManager::initialise(ID3D11Device* pd3dDevice)
     Vector2D v1 (8, 13);
     Vector2D v2 (26, 7);
     Vector2D v3(v1.x + v2.x, v1.y + v2.y);
+    m_persuitOn = false;
     return hr;
 }
 
@@ -123,6 +124,12 @@ void AIManager::update(const float fDeltaTime)
         checkForCollisions();
         AddItemToDrawList(m_pCar2);
     }
+
+    if (m_persuitOn == true)
+    {
+        Vector2D position = m_pCar2->m_currentPosition;
+        m_pCar->m_Target = position;
+    }
 }
 
 void AIManager::mouseUp(int x, int y)
@@ -163,12 +170,14 @@ void AIManager::keyDown(WPARAM param)
     {
         case key_a:
         {
-
+            m_pCar->m_Target = RandomWaypoint();
+            m_pCar->m_State = 2;
             break;
         }
 		case key_s:
 		{
-            m_pCar->m_SteeringForce = m_pCar->Seek(RandomWaypoint());
+            m_pCar->m_Target = RandomWaypoint();
+            m_pCar->m_State = 1;
 			break;
 		}
         case key_f:
@@ -178,12 +187,14 @@ void AIManager::keyDown(WPARAM param)
         }
         case key_w:
         {
-
+            m_pCar2->m_Target = RandomWaypoint();
+            m_pCar2->m_State = 3;
             break;
         }
         case key_p:
         {
-           
+            Pursuit();
+            m_pCar->m_State = 4;
             break;
         }
         case VK_SPACE:
@@ -193,6 +204,18 @@ void AIManager::keyDown(WPARAM param)
         }
         default:
             break;
+    }
+}
+
+void AIManager::Pursuit()
+{
+    if (m_persuitOn == true)
+    {
+        m_persuitOn = false;
+    }
+    else if (m_persuitOn == false)
+    {
+        m_persuitOn = true;
     }
 }
 

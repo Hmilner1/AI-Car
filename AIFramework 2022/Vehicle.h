@@ -6,6 +6,9 @@
 #include "Collidable.h"
 #include "AIManager.h"
 
+
+using namespace std;
+
 enum class carColour
 {
 	redCar,
@@ -20,6 +23,8 @@ public:
 
 	void setMaxSpeed(const float maxSpeed) { m_maxSpeed = maxSpeed; }
 	void setCurrentSpeed(const float speed); // a ratio: a value between 0 and 1 (1 being max speed)
+	Vector2D GetPosition() { return m_currentPosition; }
+	Vector2D GetVelocity() { return vel; }
 	void setPositionTo(Vector2D positionTo); // a position to move to
 	void setVehiclePosition(Vector2D position); // the current position - this resets positionTo
 	void setWaypointManager(WaypointManager* wpm);
@@ -32,8 +37,14 @@ public:
 	Vector2D vel;
 	float m_maxSpeed;
 	bool Seeking;
+	Vector2D m_Target;
 	Vector2D Seek(Vector2D Target);
 	Vector2D Arrive(Vector2D Target);
+	Vector2D Wander(Vector2D Target);
+	Vector2D Pursuit(Vector2D Target);
+	Vector2D RandomTarget();
+	float m_Distance;
+	int m_State;
 
 
 protected: // protected methods

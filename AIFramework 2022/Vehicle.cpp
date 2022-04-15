@@ -1,5 +1,7 @@
 #include "Vehicle.h"
 #include "AIManager.h"
+#include "constants.h"
+#include <cstdlib>
 
 #define NORMAL_SPEED 5000
 #define MAX_SPEED 10000
@@ -36,6 +38,33 @@ HRESULT	Vehicle::initMesh(ID3D11Device* pd3dDevice, carColour colour)
 
 void Vehicle::update(const float deltaTime)
 {
+	switch (m_State)
+	{
+		case 1:
+		{
+			m_SteeringForce = Seek(m_Target);
+			break;
+		}
+		case 2:
+		{
+			m_SteeringForce = Arrive(m_Target);
+			break;
+		}
+		case 3:
+		{
+			m_SteeringForce = Wander(m_Target);
+			if (m_Distance < 1)
+			{
+				m_Target = RandomTarget();
+				Wander(m_Target);
+			}
+			break;
+		}
+		case 4:
+		{
+			m_SteeringForce = Pursuit(m_Target);
+		}
+	}
 	//velocity movement
 	// works out acceletation based of steering force
 	Vector2D acc = m_SteeringForce / m_Mass;
@@ -94,13 +123,53 @@ void Vehicle::setWaypointManager(WaypointManager* wpm)
 Vector2D Vehicle::Seek(Vector2D Target)
 {
 	Vector2D target = Target;
-	Vector2D m_SteerForce = (Target - m_currentPosition);
-	m_SteerForce.Normalize();
-	m_SteerForce = m_SteerForce * m_maxSpeed;
-	return (m_SteerForce - vel);
+	Vector2D m_SteerForce = (Target - GetPosition());
+	float distance = m_SteerForce.Length();
+	if (distance > 2)
+	{
+		m_SteerForce.Normalize();
+		m_SteerForce = m_SteerForce * m_maxSpeed;
+		return (m_SteerForce - GetVelocity());
+	}
+	else
+	{
+		m_SteerForce = Vector2D(0,0);
+	}
 }
 
 Vector2D Vehicle::Arrive(Vector2D Target)
 {
-	return Target;
+	Vector2D direction = Target - GetPosition();
+	float magnitude = sqrt(direction.x * direction.x + direction.y * direction.y);
+	float speed = magnitude * 100;
+	Vector2D desiredVelocity = direction * speed / magnitude;
+	return (desiredVelocity - GetVelocity());
+}
+
+Vector2D Vehicle::Wander(Vector2D Target)
+{
+	Vector2D target = Target;
+	Vector2D m_SteerForce = (Target - GetPosition());
+	m_Distance = m_SteerForce.Length();
+	m_SteerForce.Normalize();
+	m_SteerForce = m_SteerForce * m_maxSpeed;
+	return (m_SteerForce - GetVelocity());	
+}
+
+Vector2D Vehicle::Pursuit(Vector2D Target)
+{
+	Vector2D target = Target;
+	Vector2D m_SteerForce = (Target - GetPosition() - Vector2D(30,0));
+	m_SteerForce.Normalize();
+	m_SteerForce = m_SteerForce * m_maxSpeed;
+	return (m_SteerForce - GetVelocity());
+}
+
+Vector2D Vehicle::RandomTarget()
+{
+	int x = (rand() % SCREEN_WIDTH) - (SCREEN_WIDTH / 2);
+	int y = (rand() % SCREEN_HEIGHT) - (SCREEN_HEIGHT / 2);
+
+
+	return(Vector2D(x,y));
 }

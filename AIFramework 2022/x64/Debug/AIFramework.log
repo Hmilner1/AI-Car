@@ -1,4 +1,6 @@
-﻿  main.cpp
-  Vehicle.cpp
-  Generating Code...
-  AIFramework.vcxproj -> C:\Users\m017209k\OneDrive - Staffordshire University\AI Repo\AI-Car\AIFramework 2022\x64\Debug\AIFramework.exe
+﻿  Vehicle.cpp
+E:\TGPGame\AI-Car\AIFramework 2022\Vehicle.cpp(127,17): warning C4244: 'initializing': conversion from 'double' to 'float', possible loss of data
+E:\TGPGame\AI-Car\AIFramework 2022\Vehicle.cpp(143,18): warning C4244: 'initializing': conversion from 'double' to 'float', possible loss of data
+E:\TGPGame\AI-Car\AIFramework 2022\Vehicle.cpp(153,34): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
+E:\TGPGame\AI-Car\AIFramework 2022\Vehicle.cpp(138): warning C4715: 'Vehicle::Seek': not all control paths return a value
+  AIFramework.vcxproj -> E:\TGPGame\AI-Car\AIFramework 2022\x64\Debug\AIFramework.exe
