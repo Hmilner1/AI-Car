@@ -1,7 +1,23 @@
-﻿  Vehicle.cpp
-C:\Users\m017209k\OneDrive - Staffordshire University\AI Repo\AI-Car\AIFramework 2022\Vehicle.cpp(133,17): warning C4244: 'initializing': conversion from 'double' to 'float', possible loss of data
-C:\Users\m017209k\OneDrive - Staffordshire University\AI Repo\AI-Car\AIFramework 2022\Vehicle.cpp(149,18): warning C4244: 'initializing': conversion from 'double' to 'float', possible loss of data
-C:\Users\m017209k\OneDrive - Staffordshire University\AI Repo\AI-Car\AIFramework 2022\Vehicle.cpp(159,34): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
-C:\Users\m017209k\OneDrive - Staffordshire University\AI Repo\AI-Car\AIFramework 2022\Vehicle.cpp(178,34): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
-C:\Users\m017209k\OneDrive - Staffordshire University\AI Repo\AI-Car\AIFramework 2022\Vehicle.cpp(144): warning C4715: 'Vehicle::Seek': not all control paths return a value
+﻿  AIManager.cpp
+C:\Users\m017209k\OneDrive - Staffordshire University\AI Repo\AI-Car\AIFramework 2022\AIManager.cpp(107,27): warning C4456: declaration of 'wp' hides previous local declaration
+C:\Users\m017209k\OneDrive - Staffordshire University\AI Repo\AI-Car\AIFramework 2022\AIManager.cpp(103,15): message : see declaration of 'wp'
+  Vehicle.cpp
+C:\Users\m017209k\OneDrive - Staffordshire University\AI Repo\AI-Car\AIFramework 2022\Vehicle.cpp(138,17): warning C4244: 'initializing': conversion from 'double' to 'float', possible loss of data
+C:\Users\m017209k\OneDrive - Staffordshire University\AI Repo\AI-Car\AIFramework 2022\Vehicle.cpp(154,18): warning C4244: 'initializing': conversion from 'double' to 'float', possible loss of data
+C:\Users\m017209k\OneDrive - Staffordshire University\AI Repo\AI-Car\AIFramework 2022\Vehicle.cpp(164,34): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
+C:\Users\m017209k\OneDrive - Staffordshire University\AI Repo\AI-Car\AIFramework 2022\Vehicle.cpp(174,34): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
+C:\Users\m017209k\OneDrive - Staffordshire University\AI Repo\AI-Car\AIFramework 2022\Vehicle.cpp(192,21): warning C4458: declaration of 'm_Distance' hides class member
+C:\Users\m017209k\OneDrive - Staffordshire University\AI Repo\AI-Car\AIFramework 2022\Vehicle.h(49,8): message : see declaration of 'Vehicle::m_Distance'
+C:\Users\m017209k\OneDrive - Staffordshire University\AI Repo\AI-Car\AIFramework 2022\Vehicle.cpp(192,19): warning C4244: 'initializing': conversion from 'double' to 'float', possible loss of data
+C:\Users\m017209k\OneDrive - Staffordshire University\AI Repo\AI-Car\AIFramework 2022\Vehicle.cpp(210,21): warning C4458: declaration of 'm_Distance' hides class member
+C:\Users\m017209k\OneDrive - Staffordshire University\AI Repo\AI-Car\AIFramework 2022\Vehicle.h(49,8): message : see declaration of 'Vehicle::m_Distance'
+C:\Users\m017209k\OneDrive - Staffordshire University\AI Repo\AI-Car\AIFramework 2022\Vehicle.cpp(210,19): warning C4244: 'initializing': conversion from 'double' to 'float', possible loss of data
+C:\Users\m017209k\OneDrive - Staffordshire University\AI Repo\AI-Car\AIFramework 2022\Vehicle.cpp(211,27): warning C4244: 'initializing': conversion from 'double' to 'float', possible loss of data
+C:\Users\m017209k\OneDrive - Staffordshire University\AI Repo\AI-Car\AIFramework 2022\Vehicle.cpp(229,28): warning C4456: declaration of 'm_SteerForce' hides previous local declaration
+C:\Users\m017209k\OneDrive - Staffordshire University\AI Repo\AI-Car\AIFramework 2022\Vehicle.cpp(209,11): message : see declaration of 'm_SteerForce'
+  Generating Code...
+C:\Users\m017209k\OneDrive - Staffordshire University\AI Repo\AI-Car\AIFramework 2022\Vehicle.cpp(149): warning C4715: 'Vehicle::Seek': not all control paths return a value
+C:\Users\m017209k\OneDrive - Staffordshire University\AI Repo\AI-Car\AIFramework 2022\Vehicle.cpp(185): warning C4715: 'Vehicle::Pursuit': not all control paths return a value
+C:\Users\m017209k\OneDrive - Staffordshire University\AI Repo\AI-Car\AIFramework 2022\Vehicle.cpp(203): warning C4715: 'Vehicle::Flee': not all control paths return a value
+C:\Users\m017209k\OneDrive - Staffordshire University\AI Repo\AI-Car\AIFramework 2022\Vehicle.cpp(240): warning C4715: 'Vehicle::ObsticalAvoidance': not all control paths return a value
   AIFramework.vcxproj -> C:\Users\m017209k\OneDrive - Staffordshire University\AI Repo\AI-Car\AIFramework 2022\x64\Debug\AIFramework.exe

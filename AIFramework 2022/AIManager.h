@@ -35,6 +35,5 @@ private:
 	bool m_FleeOn;
 	void	Pursuit();
 	void	Flee();
-
 };
 

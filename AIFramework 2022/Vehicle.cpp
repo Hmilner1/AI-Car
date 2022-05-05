@@ -70,6 +70,11 @@ void Vehicle::update(const float deltaTime)
 			m_SteeringForce = Flee(m_Target);
 			break;
 		}
+		case 6:
+		{
+			m_SteeringForce = ObsticalAvoidance(m_Target, m_SecondCarPos);
+			break;
+		}
 	}
 	//velocity movement
 	// works out acceletation based of steering force
@@ -139,7 +144,7 @@ Vector2D Vehicle::Seek(Vector2D Target)
 	}
 	else
 	{
-		m_SteerForce = Vector2D(0,0);
+		m_SteerForce = Vector2D(0, 0);
 	}
 }
 
@@ -165,27 +170,73 @@ Vector2D Vehicle::Wander(Vector2D Target)
 Vector2D Vehicle::Pursuit(Vector2D Target)
 {
 	Vector2D target = Target;
-	Vector2D m_SteerForce = (Target - GetPosition() - Vector2D(30,0));
+	Vector2D m_SteerForce = (Target - GetPosition());
+	m_Distance = m_SteerForce.Length();
 	m_SteerForce.Normalize();
-	m_SteerForce = m_SteerForce * m_maxSpeed;
-	return (m_SteerForce - GetVelocity());
+	if (m_Distance >= 100)
+	{
+		m_SteerForce = m_SteerForce * m_maxSpeed;
+		return (m_SteerForce - GetVelocity());
+	}
+	else
+	{
+		m_SteerForce = Vector2D(0, 0);
+	}
 }
 
 Vector2D Vehicle::Flee(Vector2D Target)
 {
 	Vector2D target = Target;
-	Vector2D m_SteerForce = (Target + GetPosition()); //Vector2D(30, 0));
-	m_Distance = m_SteerForce.Length();
-	//if (m_Distance <= 100)
-	//{
+	Vector2D m_vector(Target - GetPosition());
+	Vector2D m_SteerForce = (GetPosition() - Target); 
+	float m_Distance = m_vector.Length();
+	if (m_Distance <= 100)
+	{
 		m_SteerForce.Normalize();
 		m_SteerForce = m_SteerForce * m_maxSpeed;
 		return (m_SteerForce - GetVelocity());
-	//}
-	//else
-	//{
-	//	m_SteerForce = Vector2D(0,0);
-	//}
+	}
+	else
+	{
+		m_SteerForce = Vector2D(0,0);
+	}
+}
+
+Vector2D Vehicle::ObsticalAvoidance(Vector2D Target, Vector2D SecondCarPos)
+{
+	Vector2D target = Target;
+	Vector2D m_vector(SecondCarPos - GetPosition());
+	Vector2D m_SteerForce = (Target - GetPosition());
+	float m_Distance = m_vector.Length();
+	float m_DistanceToTarget = m_SteerForce.Length();
+	if (m_Distance > 100)
+	{
+		if (m_DistanceToTarget > 2)
+		{
+			m_SteerForce.Normalize();
+			m_SteerForce = m_SteerForce * m_maxSpeed;
+			return (m_SteerForce - GetVelocity());
+		}
+		else
+		{
+			m_SteerForce = Vector2D(0, 0);
+		}
+	}
+	else
+	{
+		if (m_Distance <= 100)
+		{
+			Vector2D m_SteerForce = (GetPosition() - Target);
+			m_SteerForce.Normalize();
+			m_SteerForce = m_SteerForce * m_maxSpeed;
+			return (m_SteerForce - GetVelocity());
+		}
+		else
+		{
+			m_SteerForce = Vector2D(0, 0);
+		}
+
+	}
 }
 
 Vector2D Vehicle::RandomTarget()

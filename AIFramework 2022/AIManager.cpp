@@ -125,6 +125,8 @@ void AIManager::update(const float fDeltaTime)
         AddItemToDrawList(m_pCar2);
     }
 
+    m_pCar->m_SecondCarPos = m_pCar2->m_currentPosition;
+
     if (m_persuitOn == true)
     {
         Vector2D position = m_pCar2->m_currentPosition;
@@ -136,7 +138,6 @@ void AIManager::update(const float fDeltaTime)
         Vector2D position = m_pCar2->m_currentPosition;
         m_pCar->m_Target = position;
     }
-    
 }
 
 void AIManager::mouseUp(int x, int y)
@@ -173,16 +174,21 @@ void AIManager::keyDown(WPARAM param)
     const WPARAM key_q = 81;
     const WPARAM key_p = 80;
     const WPARAM key_w = 87;
+    const WPARAM key_o = 79;
     switch (param)
     {
         case key_a:
         {
+            m_FleeOn = false;
+            m_persuitOn = false;
             m_pCar->m_Target = RandomWaypoint();
             m_pCar->m_State = 2;
             break;
         }
 		case key_s:
 		{
+            m_FleeOn = false;
+            m_persuitOn = false;
             m_pCar->m_Target = RandomWaypoint();
             m_pCar->m_State = 1;
 			break;
@@ -203,6 +209,12 @@ void AIManager::keyDown(WPARAM param)
         {
             Pursuit();
             m_pCar->m_State = 4;
+            break;
+        }
+        case key_o:
+        {
+            m_pCar->m_Target = RandomWaypoint();
+            m_pCar->m_State = 6;
             break;
         }
         case VK_SPACE:

@@ -139,7 +139,6 @@ Waypoint* WaypointManager::getNearestWaypoint(Vector2D position)
 			nearestWP = wp;
 		}
 	}
-
 	return nearestWP;
 }
 

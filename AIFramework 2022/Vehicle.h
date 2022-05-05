@@ -30,6 +30,7 @@ public:
 	void setWaypointManager(WaypointManager* wpm);
 	void hasCollided() {}
 	Vector2D m_currentPosition;
+	Vector2D m_SecondCarPos;
 	float m_currentSpeed;
 	float m_Acceleration;
 	Vector2D m_SteeringForce;
@@ -43,6 +44,7 @@ public:
 	Vector2D Wander(Vector2D Target);
 	Vector2D Pursuit(Vector2D Target);
 	Vector2D Flee(Vector2D Target);
+	Vector2D ObsticalAvoidance(Vector2D Target, Vector2D SecondCarPos);
 	Vector2D RandomTarget();
 	float m_Distance;
 	int m_State;
