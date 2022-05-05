@@ -174,10 +174,18 @@ Vector2D Vehicle::Pursuit(Vector2D Target)
 Vector2D Vehicle::Flee(Vector2D Target)
 {
 	Vector2D target = Target;
-	Vector2D m_SteerForce = (Target + GetPosition() - Vector2D(30, 0));
-	m_SteerForce.Normalize();
-	m_SteerForce = m_SteerForce * m_maxSpeed;
-	return (m_SteerForce - GetVelocity());
+	Vector2D m_SteerForce = (Target + GetPosition()); //Vector2D(30, 0));
+	m_Distance = m_SteerForce.Length();
+	//if (m_Distance <= 100)
+	//{
+		m_SteerForce.Normalize();
+		m_SteerForce = m_SteerForce * m_maxSpeed;
+		return (m_SteerForce - GetVelocity());
+	//}
+	//else
+	//{
+	//	m_SteerForce = Vector2D(0,0);
+	//}
 }
 
 Vector2D Vehicle::RandomTarget()

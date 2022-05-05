@@ -1,6 +1,7 @@
 ﻿  Vehicle.cpp
-E:\TGPGame\AI-Car\AIFramework 2022\Vehicle.cpp(133,17): warning C4244: 'initializing': conversion from 'double' to 'float', possible loss of data
-E:\TGPGame\AI-Car\AIFramework 2022\Vehicle.cpp(149,18): warning C4244: 'initializing': conversion from 'double' to 'float', possible loss of data
-E:\TGPGame\AI-Car\AIFramework 2022\Vehicle.cpp(159,34): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
-E:\TGPGame\AI-Car\AIFramework 2022\Vehicle.cpp(144): warning C4715: 'Vehicle::Seek': not all control paths return a value
-  AIFramework.vcxproj -> E:\TGPGame\AI-Car\AIFramework 2022\x64\Debug\AIFramework.exe
+C:\Users\m017209k\OneDrive - Staffordshire University\AI Repo\AI-Car\AIFramework 2022\Vehicle.cpp(133,17): warning C4244: 'initializing': conversion from 'double' to 'float', possible loss of data
+C:\Users\m017209k\OneDrive - Staffordshire University\AI Repo\AI-Car\AIFramework 2022\Vehicle.cpp(149,18): warning C4244: 'initializing': conversion from 'double' to 'float', possible loss of data
+C:\Users\m017209k\OneDrive - Staffordshire University\AI Repo\AI-Car\AIFramework 2022\Vehicle.cpp(159,34): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
+C:\Users\m017209k\OneDrive - Staffordshire University\AI Repo\AI-Car\AIFramework 2022\Vehicle.cpp(178,34): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
+C:\Users\m017209k\OneDrive - Staffordshire University\AI Repo\AI-Car\AIFramework 2022\Vehicle.cpp(144): warning C4715: 'Vehicle::Seek': not all control paths return a value
+  AIFramework.vcxproj -> C:\Users\m017209k\OneDrive - Staffordshire University\AI Repo\AI-Car\AIFramework 2022\x64\Debug\AIFramework.exe

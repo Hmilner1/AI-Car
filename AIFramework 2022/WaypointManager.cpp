@@ -160,7 +160,6 @@ vecWaypoints WaypointManager::getNeighbouringWaypoints(Waypoint* waypoint)
 			}
 		}
 	}
-
 	return nearest;
 }
 
@@ -178,6 +177,5 @@ bool WaypointManager::doWaypointsCrossBuilding(Waypoint* wp1, Waypoint* wp2)
 			return true;
 		}
 	}
-
 	return collision;
 }
